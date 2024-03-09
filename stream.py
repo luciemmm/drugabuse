@@ -203,7 +203,8 @@ help_services = {
     "Morocco": "https://www.sante.gov.ma/Pages/Accueil.aspx",
     "Algeria": "http://www.ands.dz/",
     "Indonesia": "https://www.kemkes.go.id/",
-    "Kazakhstan": "https://www.gov.kz/memleket/entities/dsm?lang=en"
+    "Kazakhstan": "https://www.gov.kz/memleket/entities/dsm?lang=en",
+    "Hong Kong SAR": "https://www.nd.gov.hk/en/index.html"
 }
 if st.button("Predict"):
     # Prepare user inputs for the model
@@ -226,7 +227,7 @@ if st.button("Predict"):
     st.write(f"The prediction is: **{result}**")
     st.write(f"Risk probability: **{probability}**")
     if result =="Lower Risk":
-        st.image('safety.jpg', caption='YOU ARE GOOD!')
+        st.image('safety.jpg', caption='According to our predictive model, you are in the lower risk group for drug abuse. However, being in a lower risk group does not guarantee immunity; proactive measures and lifestyle choices are important to minimize the risk further.')
     else:
         st.image('danger.jpg')
         caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
