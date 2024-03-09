@@ -79,6 +79,7 @@ html(marquee_html)
 # Input fields
 default_country="Germany"
 country_name = st.text_input("Country Name")
+saved_country=country_name
 if country_name not in countries:
     country_name=default_country
 
@@ -134,7 +135,76 @@ elif sex == "Non-binary":
 
 data = pd.read_csv('for_analyses4.csv')
 loaded_model = load('model.joblib')
-
+help_services = {
+    "USA": "https://www.samhsa.gov/find-help/national-helpline",
+    "Canada": "https://www.canada.ca/en/health-canada/services/substance-use/get-help/get-help-with-drug-abuse.html",
+    "UK": "https://www.talktofrank.com/",
+    "Australia": "https://www.health.gov.au/health-topics/drugs/about-drugs/help-and-support",
+    "India": "https://www.aarogyasri.telangana.gov.in/de-addiction-centres.html",
+    "South Africa": "https://www.sanca.org.za/",
+    "Germany": "https://www.dhs.de/suchthilfe",
+    "France": "https://www.drogues-info-service.fr/",
+    "Brazil": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/drogas/viva-voz",
+    "Japan": "https://www.ncnp.go.jp/nimh/yakubutsu/support_center/index.html",
+    "Spain": "https://www.pnsd.mscbs.gob.es/",
+    "Italy": "https://www.salute.gov.it/portale/salute/p1_5.jsp?lingua=italiano&id=21",
+    "Netherlands": "https://www.jellinek.nl/",
+    "Sweden": "https://www.folkhalsomyndigheten.se/publicerat-material/publikationsarkiv/a/alkohol-narkotika-dopning-tobak-och-spel-om-anvandning-problem-och-atgarder/",
+    "Norway": "https://helsenorge.no/rus-og-avhengighet",
+    "Denmark": "https://www.sundhedsstyrelsen.dk/da/sundhed/alkohol-og-rygning/rusmidler",
+    "Finland": "https://thl.fi/en/web/alcohol-tobacco-and-addictions",
+    "Belgium": "https://www.health.belgium.be/en/health/taking-care-yourself/alcohol-tobacco-drugs",
+    "Poland": "https://www.gov.pl/web/zdrowie/narkomania",
+    "Portugal": "https://www.sicad.pt/PT/Paginas/default.aspx",
+    "Greece": "https://www.okana.gr/",
+    "Ireland": "https://www.hse.ie/eng/services/list/5/addiction/",
+    "Switzerland": "https://www.sucht.swiss/",
+    "Austria": "https://www.suchthilfe.at/",
+    "Czech Republic": "https://www.drogy-info.cz/",
+    "Hungary": "https://drogfokuszpont.hu/",
+    "Romania": "https://www.ana.gov.ro/",
+    "Bulgaria": "https://ncnpt-addictions.bg/",
+    "Croatia": "https://www.hzjz.hr/sluzba-mentalno-zdravlje-i-prevencija-ovisnosti/",
+    "Slovakia": "https://www.uvzsr.sk/index.php?option=com_content&view=article&id=3386&Itemid=117",
+    "Slovenia": "https://www.nijz.si/sl/preprecevanje-odvisnosti",
+    "Estonia": "https://www.tai.ee/en",
+    "Latvia": "https://www.vm.gov.lv/en/ministry/narcology/",
+    "Lithuania": "http://www.narkotikukontrole.lt/en/",
+    "Iceland": "https://www.landlaeknir.is/um-embaettid/greinar/grein/item38520/",
+    "New Zealand": "https://www.health.govt.nz/your-health/healthy-living/addictions/alcohol-and-drug-abuse",
+    "Mexico": "https://www.gob.mx/salud/conadic",
+    "Russia": "https://www.rosminzdrav.ru/",
+    "China": "https://www.nncc626.com/",
+    "Singapore": "https://www.ncada.org.sg/",
+    "Philippines": "https://www.doh.gov.ph/faqs/What-are-the-drug-rehabilitation-centers-in-the-Philippines",
+    "Turkey": "https://www.yesilay.org.tr/en",
+    "Egypt": "http://www.emro.who.int/egy/programmes/mental-health-substance-abuse.html",
+    "Nigeria": "https://www.ndlea.gov.ng/",
+    "Kenya": "https://nacada.go.ke/",
+    "Colombia": "https://www.minsalud.gov.co/salud/publica/PENT/Paginas/Proteccion-contra-las-drogas.aspx",
+    "Argentina": "https://www.argentina.gob.ar/salud/mental-y-adicciones",
+    "Chile": "http://www.senda.gob.cl/",
+    "Peru": "https://www.devida.gob.pe/",
+    "Venezuela": "http://www.fona.gob.ve/",
+    "Malaysia": "https://www.adk.gov.my/en/public/",
+    "Thailand": "https://www.ryt9.com/s/prg/2770531",
+    "Vietnam": "https://www.moh.gov.vn/",
+    "South Korea": "http://www.narcotics.or.kr/eng/index.do",
+    "Pakistan": "https://anf.gov.pk/",
+    "Bangladesh": "http://www.dnc.gov.bd/",
+    "United Arab Emirates": "https://www.mohap.gov.ae/en/services/Pages/362.aspx",
+    "Saudi Arabia": "https://www.ncnc.gov.sa/",
+    "Iran": "https://www.dchq.ir/",
+    "Israel": "https://www.antidrugs.gov.il/",
+    "Ukraine": "https://moz.gov.ua/kontrol-za-narkotykamy",
+    "Ghana": "https://www.nacoc.gov.gh/",
+    "Uganda": "https://www.health.go.ug/programs/mental-health/",
+    "Tanzania": "https://www.moh.go.tz/en/non-communicable-diseases",
+    "Morocco": "https://www.sante.gov.ma/Pages/Accueil.aspx",
+    "Algeria": "http://www.ands.dz/",
+    "Indonesia": "https://www.kemkes.go.id/",
+    "Kazakhstan": "https://www.gov.kz/memleket/entities/dsm?lang=en"
+}
 if st.button("Predict"):
     # Prepare user inputs for the model
     # This is a placeholder; you'll need to adjust it according to your model's needs
@@ -155,3 +225,10 @@ if st.button("Predict"):
     # Display the result
     st.write(f"The prediction is: **{result}**")
     st.write(f"Risk probability: **{probability}**")
+    if result =="Lower Risk":
+        st.image('safety.jpg', caption='YOU ARE GOOD!')
+    else:
+        st.image('danger.jpg')
+        caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
+        st.markdown(caption)
+
