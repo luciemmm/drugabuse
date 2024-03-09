@@ -136,8 +136,8 @@ if sex == "Prefer not to disclose":
 elif sex == "Non-binary":
     sex = "Male"
 
-data = pd.read_csv('/Users/moemmyat/Downloads/Data-Science-suicide-analyses-/processed_data/drug/for_analyses4.csv')
-loaded_model = load('/Users/moemmyat/Downloads/Data-Science-suicide-analyses-/processed_data/drug/first_model.joblib')
+data = pd.read_csv('for_analyses4.csv')
+loaded_model = load('model.joblib')
 
 if st.button("Predict"):
     # Prepare user inputs for the model
