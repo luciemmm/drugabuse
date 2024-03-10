@@ -247,3 +247,13 @@ if st.button("Predict"):
         caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
         st.markdown(caption)
 
+if st.button("I need help"):
+    # When the button is clicked, show a form to collect contact information
+    with st.form(key='contact_form'):
+        st.write("How would you like to be approached?")
+        name = st.text_input("Name(optional)")
+        email = st.text_input("Contact Information (Email, Phone Number, Your preferred contact information)", help="We'll only use this to contact you. Please include your country code if you prefer a phone call.")
+        details = st.text_area("Additional details (optional)", help="Any additional information you'd like us to know.")
+        submit_button = st.form_submit_button(label="Submit")
+        if submit_button:
+            st.write("Thank you for reaching out. We will contact you shortly!")
