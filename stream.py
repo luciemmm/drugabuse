@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from joblib import load
+import numpy as np
 #from job import DummyClassifier
 countries=["Belgium","Finland","France","Germany","Hungary", "Italy", "Lithuania", "Netherlands", "Norway", "Portugal", "Sweden"]
 # Load the trained model (make sure to include the correct path to your .joblib file)
@@ -41,7 +42,20 @@ def predict_risk(input_data, model, original_data):
 
     # Make a prediction
     prediction = model.predict(features_df)
-
+    rf = model.named_steps['randomforestregressor']
+    preprocessed_sample = model.named_steps['columntransformer'].transform(features_df)
+    individual_predictions = np.array([tree.predict(preprocessed_sample) for tree in rf.estimators_])
+    risks = []
+    string_=""
+    for tree in individual_predictions:
+        if tree[0] > 0.1:
+            risks.append(1)
+            string_+="🚩"
+        else:
+            risks.append(0)
+            string_+="🍀"
+            
+    st.write(string_)
     return prediction
 
 # Function to predict and return the result
