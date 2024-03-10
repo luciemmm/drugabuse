@@ -244,7 +244,11 @@ if st.button("Predict"):
         st.image('safety.jpg', caption='According to our predictive model, you are in the lower risk group for drug abuse. However, being in a lower risk group does not guarantee immunity; proactive measures and lifestyle choices are important to minimize the risk further.')
     else:
         st.image('danger.jpg')
-        caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
+        if saved_country in help_services.keys():
+            caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
+        else:
+            caption=f'If you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. You may consider reaching out to us through the button below. Please, take care of yourself and seek the support you deserve.'
+
         st.markdown(caption)
 
 if st.button("I need help"):
