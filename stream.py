@@ -51,7 +51,7 @@ def predict_risk(input_data, model, original_data):
         if tree[0] >= 0.1:
             risks.append(1)
             string_+="🚩"
-        elif tree[0] >= 0.005:
+        elif tree[0] >= 0.009:
             risks.append(1)
             string_+="⚠️"
         else:
@@ -65,7 +65,7 @@ def predict_risk(input_data, model, original_data):
 def predict_outcome(probability):
     if probability >= 0.1:  # Assuming that '1' indicates "Danger"
         return "Higher Risk"
-    elif probability>= 0.005:
+    elif probability>= 0.009:
         return "Caution"
     else:
         return "Lower Risk"
