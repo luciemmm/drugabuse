@@ -51,6 +51,9 @@ def predict_risk(input_data, model, original_data):
         if tree[0] > 0.1:
             risks.append(1)
             string_+="🚩"
+        elif tree[0] > 0.01:
+            risks.append(1)
+            string_+="⚠️"
         else:
             risks.append(0)
             string_+="🍀"
@@ -62,6 +65,8 @@ def predict_risk(input_data, model, original_data):
 def predict_outcome(probability):
     if probability >= 0.1:  # Assuming that '1' indicates "Danger"
         return "Higher Risk"
+    elif probability>= 0.01:
+        return "Caution"
     else:
         return "Lower Risk"
 
@@ -242,6 +247,14 @@ if st.button("Predict"):
     st.write(f"Risk probability: **{probability}**")
     if result =="Lower Risk":
         st.image('safety.jpg', caption='According to our predictive model, you are in the lower risk group for drug abuse. However, being in a lower risk group does not guarantee immunity; proactive measures and lifestyle choices are important to minimize the risk further.')
+    elif result =="Caution":
+        st.image('caution.jpg')
+        if saved_country in help_services.keys():
+            caption=f'You are currently not in a high risk group. However, if you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. Here is a link to help you get started: {help_services[saved_country]}. Please, take care of yourself and seek the support you deserve.'
+        else:
+            caption=f'You are currently not in a high risk group. However, if you or someone you know is struggling with substance abuse, remember that you are not alone, and help is available. You may consider reaching out to us through the button below. Please, take care of yourself and seek the support you deserve.'
+
+        st.markdown(caption)
     else:
         st.image('danger.jpg')
         if saved_country in help_services.keys():
