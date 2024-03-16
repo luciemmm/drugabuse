@@ -72,7 +72,7 @@ def predict_outcome(probability):
         return "Lower Risk"
 
 # Streamlit UI components
-st.title("Drug Abuse Vulnerability Prediction ")
+st.title("Drug Abuse Vulnerability Prediction")
 from streamlit.components.v1 import html
 
 # Define your text and marquee speed
