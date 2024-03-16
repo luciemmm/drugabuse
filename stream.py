@@ -47,6 +47,7 @@ def predict_risk(input_data, model, original_data):
     individual_predictions = np.array([tree.predict(preprocessed_sample) for tree in rf.estimators_])
     risks = []
     string_=""
+    st.write("Decisions from Our Random Forest Algorithm")
     for tree in individual_predictions:
         if tree[0] >= 0.1:
             risks.append(1)
